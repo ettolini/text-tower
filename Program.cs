@@ -7,6 +7,8 @@ namespace TextTowerProject
         static void Main(string[] args)
         {
             TextTower textTower = new TextTower();
+            CvsManager cvsFile = new CvsManager();
+
             string[] options = new string[] { "1", "2", "3", "4" };
             bool execute = true;
 
@@ -45,6 +47,7 @@ Please, try again...
                         System.Console.Write("Please, enter what you would like to add to the tower: ");
                         input = Console.ReadLine();
                         textTower.Push(input);
+                        cvsFile.PushText(input);
                         secretTrigger++;
 
                         System.Console.WriteLine("Tower successfully expanded!");
@@ -53,6 +56,7 @@ Please, try again...
                     {
                         System.Console.Write("The following text box was removed: ");
                         System.Console.WriteLine(textTower.Pop());
+                        cvsFile.PopText();
                         secretTrigger--;
 
                         if (secretTrigger == 3)
@@ -70,8 +74,9 @@ Please, try again...
                     if (option == 3 && secretTrigger > 3)
                     {
                         System.Console.WriteLine("... You shouldn't have done that.");
-                        
+
                         textTower.Clear();
+                        cvsFile.ClearText();
                         secretTrigger = 0;
                         secretText = "";
 
